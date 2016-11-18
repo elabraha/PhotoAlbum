@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+	<div>
+		<form method="post" action="/ofvujvy4x6r/pa4/search" class="form-horizontal text-center">
+			<div class="form-inline">
+			<input class="form-control" type="text" placeholder="Search" name="query"></input>
+			<button class=" form-control btn btn-default" type="submit">Search</button>
+			<input type="hidden" name="op" value="search">
+			</div>
+		</form>
+	</div>
+	{% if result %}
+	<p align="middle">{{length}} matches found</p>
+	<table class="table table-hover">
+	
+		{% for photo in result %}
+		<tr>
+			<td>
+			<p>{{photo['sequencenum']}}</p>
+			</td>
+			<td>
+			<form method="post" action= "/ofvujvy4x6r/pa4/search">
+				<input type="image" height=100 width=100 hspace=20 vspace=20 class="img-thumbnail" src="/static/{{photo['url']}}" alt="Submit Form" />
+				<input type="hidden" name="query" value="{{photo['caption']}}">
+				<input type="hidden" name="op" value="search">
+			</form>
+			</td>
+			<td>
+				<p>{{photo['caption']}}</p>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+{% endblock %}

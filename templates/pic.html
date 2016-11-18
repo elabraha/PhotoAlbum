@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+{% if prev_url %}
+<div class="row">
+    <div class="col-sm-1 col-sm-offset-1">
+		<form method="post" action="/ofvujvy4x6r/pa4/pic?id={{prev_id}}">
+	        <button type="submit" class="btn btn-default">Previous</button>
+	        <input type="hidden" name="op" value="prev_button">
+	        <input type="hidden" name="url" value="{{prev_url}}">
+	        <input type="hidden" name="seq" value="{{prev_seq}}">
+	    </form>
+    </div>
+    <div class="col-sm-offset-10">   
+	    <form method="post" action="/ofvujvy4x6r/pa4/pic?id={{next_id}}">
+	        <button type="submit" class="btn btn-default">Next</button>
+	        <input type="hidden" name="op" value="next_button">
+	        <input type="hidden" name="url" value="{{next_url}}">
+	        <input type="hidden" name="seq" value="{{next_seq}}">
+	    </form>
+    </div>
+</div>
+{% endif %}
+<img class="displayed" src="{{url}}" class="img-responsive">
+<!-- {% if caption != None %} -->
+<p id="favorite_display" style = "text-align:center">hghgh</p>
+<!-- {% endif %} -->
+<div style="text-align:center">
+    <b>Caption: </b><input id="caption"/>
+</div>
+{% if login %}
+	<div>
+	    <button class="btn btn-default col-sm-offset-5" id="favorite" onclick="makeFavoritePostRequest('{{picid}}', '{{login}}')">Favorite</button>
+	</div>
+{% endif %}
+{% endblock %}
+{% block extrascripts %}
+    <script type="text/javascript">
+        initCaption("{{ picid }}"); <!-- assuming picid is passed to pic.html from your controller -->
+    </script>
+    <script type="text/javascript">
+        initFavorite("{{picid}}", "{{login}}");
+    </script>
+{% endblock %}

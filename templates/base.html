@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<script type="text/javascript" src="/static/js/qwest.min.js"></script>
+    	<script type="text/javascript" src="/static/js/caption.js"></script>
+    	<script type="text/javascript" src="/static/js/favorite.js"></script>
+		<link rel="stylesheet" type="text/css" href="/static/style.css"/>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link href="http://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet" type="text/css">
+		<title>Gr0up73: The sequel</title>
+	</head>
+	<body>
+		{% if login %}
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a id="" class="navbar-brand" href="/ofvujvy4x6r/pa3">Gr0up73</a>
+			    </div>
+			    <div>
+			      <ul class="nav navbar-nav">
+			        <li><a href="/ofvujvy4x6r/pa4">Home</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4/user/edit">Edit Account</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4/albums">My Albums</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4">About</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4">Contact</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4/search">Search</a></li>
+			      </ul>
+			    </div>
+			    <div>
+			    	<ul class="nav navbar-nav navbar-right">
+			    		<li><p class="navbar-text">Logged in as {{login}}</p></li>
+			    		<li><a href="/ofvujvy4x6r/pa3/logout">Logout</a></li>
+			    	</ul>
+			    </div>
+			  </div>
+			</nav>
+		{% else %}
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="/ofvujvy4x6r/pa4">Gr0up73</a>
+			    </div>
+			    <div>
+			      <ul class="nav navbar-nav">
+			 		<li><a href="/ofvujvy4x6r/pa4">Home</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4/albums">Public Albums</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4">About</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4">Contact</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4/search">Search</a></li>
+			 	  </ul>
+			 	</div>
+			 	<div>
+			 	  <ul class="nav navbar-nav navbar-right">  
+			 		<li><a href="/ofvujvy4x6r/pa4/user/login">Login</a></li>
+			 		<li><a href="/ofvujvy4x6r/pa4/user">Sign Up</a></li>
+			      </ul>
+			    </div>
+			  </div>
+			</nav>
+		{% endif %}
+		{% block content %}{% endblock %}
+		{% block extrascripts %} <!-- This is where we'll load inline scripts specific for a given template -->
+    	{% endblock %}
+	</body><br><br><br><br>
+	<footer class="footer">
+    	<div class="container"><br>
+    		<p class="text-muted">Created By: Eliana Abraham - Noelle Hansford - Alec Rager</p>
+    	</div>
+    </footer>
+</html>

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 id="homename">Gr0up73</h1>
+    <p id="hometext">World's Sauciest Image Hosting Site</p>
+    {% if login %}
+    <div class="col-sm-offset-1">
+	    {% for user in album.keys() %}
+	    	{% if user != login %}
+		        <h3 id="login">{{user}}:</h3>
+		        {% for index in album[user] %}
+		        <div>
+		            <button class="btn btn-default" onclick="location.href='/ofvujvy4x6r/pa3/album?id={{index[0]}}'">{{index[1]}}</button><br><br>
+		        </div>
+		        {% endfor %}
+	        {% endif %}
+	    {% endfor %}
+	</div>
+    {% endif %}
+{% endblock %}

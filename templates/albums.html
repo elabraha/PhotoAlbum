@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if login %}
+        <div>
+            <div class="col-sm-offset-1">
+                <label id="login">My Albums</label>
+                <button class="btn btn-info col-sm-offset-7" onclick="location.href ='/ofvujvy4x6r/pa3/albums/edit'" type="Button">Edit Albums</button>
+            </div><br>
+            <div class="col-sm-offset-1 btn-group-vertical">
+                {% for album in albums %}
+                <div>
+                    <button class="btn btn-default" onclick="location.href='/ofvujvy4x6r/pa3/album?id={{album['albumid']}}'">{{album['title']}}
+                    </button><br><br>
+                </div>
+                {% endfor %}
+            </div>
+        </div> 
+    {% elif public %}
+        <div>
+            <div class="col-sm-offset-1">
+                <h2 id="pubalbums">Checkout our users' public albums:</h2>
+            </div><br>
+            <div class="col-sm-offset-1">
+                {% for user in public.keys() %}
+                    <h3 id="login">{{user}}:</h3>
+                    {% for index in public[user] %}
+                    <div>
+                        <button class="btn btn-default" onclick="location.href='/ofvujvy4x6r/pa3/album?id={{index[0]}}'">{{index[1]}}</button><br><br>
+                    </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %} 
+{% endblock %}

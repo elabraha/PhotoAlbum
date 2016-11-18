@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="post" id="signup" class="form-horizontal text-center" role="form" action="/ofvujvy4x6r/pa3" onSubmit="return passCheck()">
+        <input type="hidden" name="op" value="signup">
+        <div>
+            <h2 id="login">Join Gr0up73</h2>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-5">
+                <input type="username" class="form-control" name="username" placeholder="Username" required pattern="[A-Za-z0-9_]{3,20}" maxlength = "20">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-5"> 
+                <input type="text" required class="form-control" name="firstname" placeholder="First Name" maxlength = "20">
+            </div>
+        </div>
+        <div class="form-group"> 
+            <div class="col-sm-2 col-sm-offset-5"> 
+                <input type="text" required class="form-control" name="lastname" placeholder="Last Name" maxlength = "20">
+            </div>
+        </div>
+        <div class="form-group"> 
+            <div class="col-sm-2 col-sm-offset-5"> 
+                <input type="email"  class="form-control" required name="email" placeholder="Email" maxlength = "20"required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            </div>
+        </div>
+        <div class="form-group"> 
+            <div class="col-sm-2 col-sm-offset-5"> 
+                <input id="pass" type="password" required class="form-control" name="password" placeholder="Password" required pattern="^(?=.*\d)(?=.*[a-zA-Z]).{5,15}$" maxlength = "15">
+            </div>
+        </div>
+        <div class="form-group"> 
+            <div class="col-sm-2 col-sm-offset-5"> 
+                <input id="confirm" type="password" required class="form-control" name="password2" placeholder="Confirm Password"  required pattern="^(?=.*\d)(?=.*[a-zA-Z]).{5,15}$" maxlength = "15" onkeyup="Confirm_pass_match(); return false;">
+            </div>
+        </div>
+        <div class="form-group"> 
+            <div>
+                <button type="submit" class="btn btn-info">Sign Up</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        // I just wanted to say I got parts of these functions 
+        // online because I could not come with this entirely on my own.
+
+        function Confirm_pass_match()
+        {
+            //Store the password field objects into variables ...
+            var pass1 = document.getElementById('pass');
+            var pass2 = document.getElementById('confirm');
+            //Store the Confimation Message Object ...
+            //var message = document.getElementById('confirmMessage');
+            //Set the colors we will be using ...
+            var goodColor = "#66cc66";
+            var badColor = "#ff6666";
+            //Compare the values in the password field 
+            //and the confirmation field
+            if(pass1.value == pass2.value && pass1 != ""){
+                //The passwords match. 
+                //Set the color to the good color and inform
+                //the user that they have entered the correct password 
+                pass2.style.backgroundColor = goodColor;
+                message.style.color = goodColor;
+                
+            }else{
+                //The passwords do not match.
+                //Set the color to the bad color and
+                //notify the user.
+                pass2.style.backgroundColor = badColor;
+                message.style.color = badColor;
+
+            }
+        } 
+        function passCheck(){
+            var pass1 = document.getElementById('pass').value;
+            var pass2 = document.getElementById('confirm').value;
+            if(pass1 == pass2 && pass1 != ""){
+                return true;
+            }
+            else{
+                alert("Passwords do not match. Please retry.");
+                document.getElementById('signup').reset();
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h3 id="editalbums">Edit Albums</h3>
+    <table class="table table-hover">
+        <thead id="editalbumshead">
+            <tr>
+                <th class="text-center">Album</th>
+                <th class="text-center">Current Access</th>
+                <th class="text-center">Edit Album</th>
+                <th class="text-center">Delete Album</th>
+            </tr>
+        </thead>
+        <tbody id="editalbumsentries">
+            {% for album in albums %}
+            <tr>
+                <td>{{album['title']}}</td>
+                <td>
+                    {% if album['access']=='public' %}
+                    Public
+                    {% else %}
+                    Private
+                    {% endif %}
+                </td>
+                <td><button class="btn btn-default"onclick="location.href = '/ofvujvy4x6r/pa3/album/edit?id={{album['albumid']}}'"type="button">Edit</button></td>
+                <td>
+                    <form method="post" action="/ofvujvy4x6r/pa3/albums">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <input type="hidden" name="op" value="delete">
+                        <input type="hidden" name="albumid" value="{{album['albumid']}}">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    <h3 id="editalbums">New Album</h3>
+    <table class="col-sm-offset-4">
+        <tr>
+            <form id="addnew" method="post" action="/ofvujvy4x6r/pa3/albums">
+                <td class="col-sm-3">
+                    <input type="hidden" name="op" value="add">
+                    <input class="form-control" type="text" name="title" placeholder="Album Name">
+                    <input type="hidden" name="username" value="{{login}}">
+                </td>
+                <td class="col-sm-2">
+                    <select class="form-control" name="access" form="addnew">
+                        <option value="private">Private</option>
+                        <option value="public">Public</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-info" type="submit">Add</button>
+                </td>  
+            </form>
+        </tr>
+    </table>
+</div>
+{% endblock %}

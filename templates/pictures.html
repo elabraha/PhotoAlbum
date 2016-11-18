@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+        <div class="col-sm-offset-1">
+            <label id="login">{{title}}</label>
+            {% if login == alb_user %}
+            <button class="btn btn-info col-sm-offset-7" onclick="location.href = '/ofvujvy4x6r/pa3/album/edit?id={{albumid}}'"type="button">Edit Album</button>
+            {% endif %}
+        </div>
+        {% if not_empty %}
+        <table class="table table-hover">
+            <thead id="editalbumshead">
+                <tr>
+                    <th class="text-center">Photo</th>
+                    <th class="text-center">Caption</th>
+                    <th class="text-center">Date Created</th>
+                </tr>
+            </thead>
+            <tbody id="editalbumsentries">
+                {% for photo in album_photos %}
+                <tr>
+                    <td>
+                        <a href="/ofvujvy4x6r/pa3/pic?id={{photo['picid']}}"><img class="img-thumbnail" height=100 width=100 hspace=20 vspace=20 src="/static{{photo['url']}}"></a>
+                    </td>
+                    <td>
+                        {% if photo['caption'] != None %}
+                            <p >{{photo['caption']}}</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <p >{{photo['date']}}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- <table style = width="100%">
+        {% for photo in album_photos %}
+        <tr>
+            <td>
+            <a href="/ofvujvy4x6r/pa3/pic?id={{photo['picid']}}"><img class="img-thumbnail" height=100 width=100 hspace=20 vspace=20 src="/static{{photo['url']}}"></a>
+            </td>
+            <td>
+                <p>{{photo['date']}}</p>
+            </td>
+            <td>
+                {% if photo['caption'] != None %}
+                <p>{{photo['caption']}}</p>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </table> -->
+        {% endif %}
+        <br><br><br><br>
+{% endblock %}

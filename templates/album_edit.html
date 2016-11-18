@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if login %}
+    <div>
+        <div class="col-sm-offset-1">
+            <label id="login">Edit {{title}}</label>
+            <form method="post" action="/ofvujvy4x6r/pa3/album?id={{albumid}}">
+                <input type="hidden" name="op" value="update_access">
+                <input type="hidden" name="access" value="{{access_type}}">
+                <button class="btn btn-info col-sm-offset-5" type="submit">
+                    {% if access_type == 'public' %}
+                    Make Public
+                    {% else %}
+                    Make Private
+                    {% endif %}
+                </button>
+            </form>
+            <div class="col-sm-5 col-sm-offset-0">
+                <form method="post" id="album_name" action="/ofvujvy4x6r/pa3/album?id={{albumid}}">
+                    <input type="hidden" name="op" value="change_album_name">
+                    <input type="text" class="form-control" placeholder="Enter New Album Name" name="album_name">
+                    <button class="btn btn-default" type="submit">Change</button>
+                </form>
+            </div>
+        </div><br><br>
+        {% if access_type == 'public' %}
+        <table class="table table-hover">
+            <thead id="editalbumshead">
+                <tr>
+                    <th class="text-center">Users With Access</th>
+                    <th class="text-center">Update Access</th>
+                </tr>
+            </thead>
+            <tbody id="editalbumsentries">
+                {% for user in access %}
+                <tr>
+                    <td>{{user['username']}}</td>
+                    <td>
+                        <form method="post" action="/ofvujvy4x6r/pa3/album?id={{albumid}}">
+                            <input type="hidden" name="op" value="revoke">
+                            <input type="hidden" name="user" value="{{user['username']}}">
+                            <button class="btn btn-default" type="submit">Revoke</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <form class="col-sm-6" method="post" id="newaccess" action="/ofvujvy4x6r/pa3/album?id={{albumid}}">
+                        <input type="hidden" name="op" value="newuser">
+                        <td>
+                        <input type="text" name = "user" class="form-control col-sm-offset-3" placeholder="Enter User To Allow Access" name="newuser"></td>
+                        <td>
+                        <button class="btn btn-default" type="submit">Add</button></td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+    </div><br><br>
+    <div>
+        {% if not_empty %}
+        <table class="table table-hover">
+            <thead id="editalbumshead">
+                <tr>
+                    <th class="text-center">Photo</th>
+                    <th class="text-center">Edit Caption</th>
+                    <th class="text-center">Delete Photo</th>
+                </tr>
+            </thead>
+            <tbody id="editalbumsentries">
+                {% for photo in album_photos %}
+                <tr>
+                    <td>
+                        <img class="img-thumbnail" height=100 width=100 hspace=20 vspace=20 src="/static{{photo['url']}}">
+                    </td>
+                    <td>
+                        <form method="post" id="caption" action="/ofvujvy4x6r/pa3/album?id={{albumid}}">
+                            <input type="hidden" name="op" value="make_caption">
+                            <input type="hidden" name="picid" value="{{photo['picid']}}">
+                            <input type="text" class="form-control" placeholder="Enter New Caption" name="caption">
+                            <button class="btn btn-default" type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/ofvujvy4x6r/pa3/album?id={{albumid}}">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                            <input type="hidden" name="op" value="delete">
+                            <input type="hidden" name="albumid" value="{{albumid}}">
+                            <input type="hidden" name="picid" value="{{photo['picid']}}">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td><h3 id="editalbums">New Photo</h3></td>
+                <form method="post" action="/ofvujvy4x6r/pa3/album?id={{albumid}}" enctype="multipart/form-data">
+                    <td class="col-sm-2">
+                        <input type="hidden" name="op" value="add">
+                        <input type="hidden" name="albumid" value="{{albumid}}">
+                        <input type="file" name="photo">
+                    </td>
+                    <td>
+                        <button class="btn btn-info" type="submit">Upload</button>
+                    </td>  
+                </form>
+            </tr>
+        </table>
+    </div><br><br><br><br>
+    {% endif %}
+{% endblock %}
